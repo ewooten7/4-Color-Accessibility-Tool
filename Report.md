@@ -343,11 +343,13 @@ This assignment’s focus on color contrast and colorblindness illustrates core 
 
 # References:
 
-1. ACM SIGCHI. (n.d.). What is HCI? Association for Computing Machinery – Special Interest Group on Computer–Human Interaction. Retrieved November 3, 2025, from https://sigchi.org/about/what-is-hci/
+1. Codacy. (2025, October 9). What is clean code? A guide to principles and best practices. https://blog.codacy.com/what-is-clean-code 
 
-2. Nielsen Norman Group. (2023, June 4). What is human–computer interaction (HCI)? Nielsen Norman Group. https://www.nngroup.com/articles/what-is-hci/
+2. What is Human-Computer Interaction (HCI)? (2016, June 6). The Interaction Design Foundation; Interaction Design Foundation. https://www.interaction-design.org/literature/topics/human-computer-interaction?srsltid=AfmBOorG2ljpIm02okt3c2gVyeVplhRMl7khqcXv8B18s4I0mAxI6dAF
 
-3. World Wide Web Consortium (W3C). (n.d.). Introduction to accessibility. Web Accessibility Initiative (WAI). Retrieved November 3, 2025, from https://www.w3.org/WAI/fundamentals/accessibility-intro/
+3. U.S. Access Board. Chapter 7: Signs. (n.d.). https://www.access-board.gov/ada/guides/chapter-7-signs/ 
+
+4. World Wide Web Consortium (W3C). (n.d.). Introduction to accessibility. Web Accessibility Initiative (WAI). https://www.w3.org/WAI/fundamentals/accessibility-intro/
 
 
 Your reflection should demonstrate understanding of the field while incorporating insights from your research sources. Write in paragraph form rather than bullet points, and aim for thoughtful analysis rather than simple summaries.
