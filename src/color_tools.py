@@ -558,20 +558,25 @@ def find_accessible_gray_background(text_r: int, text_g: int, text_b: int) -> in
     Returns:
         int: Darkest gray value (0-255) that provides AA contrast, or 255 if none work
     """
-    # Start from white
-    gray = 255
+
+    gray = 255  # It starts white
     darkest_valid_gray = 255
 
-    # Iterate down through grays
     while gray >= 0:
         contrast = contrast_ratio(text_r, text_g, text_b, gray, gray, gray)
-
         if contrast >= WCAG_AA_NORMAL_RATIO:
             darkest_valid_gray = gray
+        gray -= GRAY_STEP_SIZE  # goes darker
 
-        gray = gray - GRAY_STEP_SIZE
+    gray = darkest_valid_gray  # start from last good value
+    while gray >= 0:
+        contrast = contrast_ratio(text_r, text_g, text_b, gray, gray, gray)
+        if contrast < WCAG_AA_NORMAL_RATIO:
+            break
+        darkest_valid_gray = gray
+        gray -= 1
 
-    if darkest_valid_gray == 255:
+    if darkest_valid_gray == 255:  # My fallback if checks fail
         return 255
     return int(darkest_valid_gray)
 
@@ -580,7 +585,8 @@ def find_accessible_gray_background(text_r: int, text_g: int, text_b: int) -> in
 """
 Simliar steps to the previous function.
 Started at lightest gray (255; basically WHITE) and tested darker grays in steps of 5.
-HARDEST CHALLEGE SO FAR HERE
+HARDEST CHALLEGE SO FAR HERE. I kept running into an issue where 117 would not be processed correctly due to the GRAY_STEP_SIZE incremental stepping
+After discussion and a LOT of troubleshooting, I added a some code to resolve that issue to slightly adjust it. 
 """
 
 
