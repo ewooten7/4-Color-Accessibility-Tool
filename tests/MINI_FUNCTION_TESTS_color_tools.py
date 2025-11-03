@@ -629,21 +629,27 @@ def find_accessible_gray_background(text_r: int, text_g: int, text_b: int) -> in
     Returns:
         int: Darkest gray value (0-255) that provides AA contrast, or 255 if none work
     """
-    gray = 255  # start from white
+
+    gray = 255  # It starts white
     darkest_valid_gray = 255
 
     while gray >= 0:
         contrast = contrast_ratio(text_r, text_g, text_b, gray, gray, gray)
-
         if contrast >= WCAG_AA_NORMAL_RATIO:
             darkest_valid_gray = gray
+        gray -= GRAY_STEP_SIZE  # goes darker
 
-        gray -= GRAY_STEP_SIZE  # Step down to the next darker shade
+    gray = darkest_valid_gray  # start from last good value
+    while gray >= 0:
+        contrast = contrast_ratio(text_r, text_g, text_b, gray, gray, gray)
+        if contrast < WCAG_AA_NORMAL_RATIO:
+            break
+        darkest_valid_gray = gray
+        gray -= 1
 
-    if darkest_valid_gray == 255:
+    if darkest_valid_gray == 255:  # My fallback if checks fail
         return 255
-
-    return darkest_valid_gray
+    return int(darkest_valid_gray)
 
 
 # EX 1
@@ -667,37 +673,3 @@ print("Test 5:", find_accessible_gray_background(
 
 # EX 6
 print("Test 6:", find_accessible_gray_background(128, 128, 128))  # Should be 200
-
-
-# Thinking
-"""
-Start at gray = 255
-
-Initialize darkest_valid_gray = 255
-
-While gray ≥ 0:
-
-Compute contrast = contrast_ratio(text_r, text_g, text_b, gray, gray, gray)
-
-If contrast ≥ 4.5, update darkest_valid_gray = gray
-
-Decrease gray by 5
-
-When loop ends, return darkest_valid_gray
-"""
-
-# Pseudocode:
-"""
-CONSTANT VARIABLE gray = 255
-CONSTANT VARIABLE darkest_valid_gray = 255
-
-WHILE gray >= 0:
-    contrast = contrast_ratio(text_r, text_g, text_b, gray, gray, gray)
-
-    if contrast >= WCAG_AA_NORMAL_RATIO:
-        darkest_valid_gray = gray
-    gray = gray - GRAY_STEP_SIZE
-
-RETURN darkest_valid_gray
-
-"""
